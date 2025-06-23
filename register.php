@@ -14,14 +14,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt = $conn->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $username, $email, $hash);
+    $stmt = $pdo->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
 
-    if ($stmt->execute()) {
+    if ($stmt->execute([$username, $email, $hash])) {
         header("Location: login.php");
         exit();
     } else {
-        echo "Lỗi đăng ký: " . $stmt->error;
+        echo "Lỗi đăng ký.";
     }
 }
 ?>

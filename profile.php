@@ -1,9 +1,9 @@
 <?php
+session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
-session_start();
 require_once "db.php";
 
 // Lấy user_id từ URL hoặc session nếu không có
